@@ -292,7 +292,9 @@ If the Pod [restarts](#pod-restart-reasons), or is restarted, all init container
 must execute again.
 
 Changes to the init container spec are limited to the container image field.
-Altering an init container image field is equivalent to restarting the Pod.
+Altering an init container image will not automatically trigger the Pod to restart.
+You can use a [workload controller](/docs/concepts/workloads/) to cause such updates
+to restart the affected pods.
 
 Because init containers can be restarted, retried, or re-executed, init container
 code should be idempotent. In particular, code that writes to files on `EmptyDirs`
